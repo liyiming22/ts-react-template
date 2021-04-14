@@ -1,1 +1,1 @@
-# React Typescript boil template
+# React Typescript boilerplate 
