@@ -4,7 +4,7 @@ import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration, RuleSetUseItem } from 'webpack'
 import { Options as HtmlMinifierOptions } from 'html-minifier'
-import { PROJECT_ROOT, PROJECT_NAME, __DEV__ } from './../constants'
+import { PROJECT_ROOT, PROJECT_NAME, __DEV__ } from '../constants'
 
 const htmlMiniFierOptions: HtmlMinifierOptions = {
   collapseWhitespace: true,
@@ -28,13 +28,13 @@ function getStyleLoaderConfig(importLoaders: number): RuleSetUseItem[] {
       options: {
         modules: false,
         sourceMap: __DEV__,
-        importLoaders
-      }
+        importLoaders,
+      },
     },
     {
       loader: 'postcss-loader',
-      options: { sourceMap: __DEV__ }
-    }
+      options: { sourceMap: __DEV__ },
+    },
   ]
 }
 
@@ -66,7 +66,7 @@ const commonConfig: Configuration = {
       },
       {
         test: /\.css$/,
-        use: getStyleLoaderConfig(1)
+        use: getStyleLoaderConfig(1),
       },
       {
         test: /\.less$/,
@@ -75,10 +75,10 @@ const commonConfig: Configuration = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: __DEV__
-            }
-          }
-        ]
+              sourceMap: __DEV__,
+            },
+          },
+        ],
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -105,7 +105,7 @@ const commonConfig: Configuration = {
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new WebpackBar({
@@ -117,10 +117,10 @@ const commonConfig: Configuration = {
     new HtmlWebpackPlugin({
       minify: __DEV__ ? false : htmlMiniFierOptions,
       cache: false,
-      template: path.resolve(PROJECT_ROOT, './public/index.html')
+      template: path.resolve(PROJECT_ROOT, './public/index.html'),
     }),
     // new HardSourceWebpackPlugin()
-  ]
+  ],
 }
 
 export default commonConfig

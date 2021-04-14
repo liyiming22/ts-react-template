@@ -1,10 +1,18 @@
 import { hot } from 'react-hot-loader/root'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 
 function App() {
+  const [count, setCount] = useState(0)
+  const add = useCallback(() => {
+    setCount((cnt) => cnt + 1)
+  }, [])
+
   return (
     <>
-      <h1>App</h1>
+      <h3>{count}</h3>
+      <button type='button' onClick={add}>
+        Click
+      </button>
     </>
   )
 }

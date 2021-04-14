@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/prevent-abbreviations
 import path from 'path'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { merge } from 'webpack-merge'
@@ -6,9 +7,9 @@ import 'webpack-dev-server'
 import commonConfig from './webpack.common'
 import { DEFAULT_PORT, HOST, PROJECT_ROOT } from '../constants'
 
-const devConfig: Configuration = merge(commonConfig, {
+const developmentConfig: Configuration = merge(commonConfig, {
   mode: 'development',
-  // a bug in webpack-dev-server v3 https://github.com/webpack/webpack-dev-server/issues/2758 when you're using it with webpack 5 and browserslist. 
+  // a bug in webpack-dev-server v3 https://github.com/webpack/webpack-dev-server/issues/2758 when you're using it with webpack 5 and browserslist.
   // 所以这里需要设置 target 为 web
   target: 'web',
   devtool: 'eval-cheap-module-source-map',
@@ -16,8 +17,8 @@ const devConfig: Configuration = merge(commonConfig, {
     new ForkTsCheckerWebpackPlugin({
       typescript: {
         configFile: path.resolve(PROJECT_ROOT, 'tsconfig.json'),
-        memoryLimit: 1024
-      }
+        memoryLimit: 1024,
+      },
     }),
   ],
   devServer: {
@@ -27,8 +28,8 @@ const devConfig: Configuration = merge(commonConfig, {
     clientLogLevel: 'silent',
     compress: true,
     // open: true,
-    hot: true
+    hot: true,
   },
 })
 
-export default devConfig
+export default developmentConfig

@@ -1,4 +1,4 @@
-const envPreset = [
+const environmentPreset = [
   '@babel/preset-env',
   {
     // 只导入需要的 polyfill
@@ -10,10 +10,10 @@ const envPreset = [
   },
 ]
 
-module.exports = function (api) {
+module.exports = (api) => {
   api.cache(true)
   return {
-    presets: ['@babel/preset-typescript', envPreset],
+    presets: ['@babel/preset-typescript', environmentPreset],
     plugins: [
       '@babel/plugin-transform-runtime',
       '@babel/plugin-syntax-dynamic-import',
@@ -27,10 +27,7 @@ module.exports = function (api) {
       },
       production: {
         presets: ['@babel/preset-react'],
-        plugins: [
-          '@babel/plugin-transform-react-constant-elements',
-          '@babel/plugin-transform-react-inline-elements',
-        ],
+        plugins: ['@babel/plugin-transform-react-constant-elements', '@babel/plugin-transform-react-inline-elements'],
       },
     },
   }
