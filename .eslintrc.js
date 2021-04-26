@@ -57,6 +57,15 @@ module.exports = {
     ],
     'no-console': OFF,
     'unicorn/no-for-loop': ERROR,
+    'react/jsx-props-no-spreading': OFF,
   },
   plugins: ['react', 'unicorn', 'promise', '@typescript-eslint', 'prettier'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.tsx', '.ts'],
+      },
+      typescript: {},
+    },
+  },
 }

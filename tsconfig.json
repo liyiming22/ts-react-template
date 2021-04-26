@@ -26,7 +26,14 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
-
+    "baseUrl": "./",
+    "paths": {
+      "Src/*": ["src/*"],
+      "Components/*": ["src/components/*"],
+      "Views/*": ["src/views/*"],
+      "Utils/*": ["src/utils/*"],
+      "Constants/*": ["src/constants/*"]
+    },
   },
   "include": ["src", "scripts"]
 }
