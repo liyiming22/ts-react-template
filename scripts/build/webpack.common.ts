@@ -6,6 +6,9 @@ import { Configuration, RuleSetUseItem } from 'webpack'
 import { Options as HtmlMinifierOptions } from 'html-minifier'
 import { PROJECT_ROOT, PROJECT_NAME, __DEV__ } from '../constants'
 
+const lessRegex = /\.less$/
+const lessModuleRegex = /\.module\.less$/
+
 const htmlMiniFierOptions: HtmlMinifierOptions = {
   collapseWhitespace: true,
   collapseBooleanAttributes: true,
@@ -20,13 +23,13 @@ const htmlMiniFierOptions: HtmlMinifierOptions = {
   useShortDoctype: true,
 }
 
-function getStyleLoaderConfig(importLoaders: number): RuleSetUseItem[] {
+function getStyleLoaderConfig(importLoaders: number, modules = false): RuleSetUseItem[] {
   return [
     'style-loader',
     {
       loader: 'css-loader',
       options: {
-        modules: false,
+        modules,
         sourceMap: __DEV__,
         importLoaders,
       },
@@ -71,9 +74,22 @@ const commonConfig: Configuration = {
         use: getStyleLoaderConfig(1),
       },
       {
-        test: /\.less$/,
+        test: lessRegex,
+        exclude: lessModuleRegex,
         use: [
           ...getStyleLoaderConfig(2),
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: __DEV__,
+            },
+          },
+        ],
+      },
+      {
+        test: lessModuleRegex,
+        use: [
+          ...getStyleLoaderConfig(2, true),
           {
             loader: 'less-loader',
             options: {
@@ -121,7 +137,6 @@ const commonConfig: Configuration = {
       cache: false,
       template: path.resolve(PROJECT_ROOT, './public/index.html'),
     }),
-    // new HardSourceWebpackPlugin()
   ],
 }
 
