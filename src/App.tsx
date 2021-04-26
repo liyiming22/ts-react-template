@@ -1,7 +1,6 @@
-import { hot } from 'react-hot-loader/root'
 import React, { useCallback, useState } from 'react'
 
-function App() {
+const App: React.FC = () => {
   const [count, setCount] = useState(0)
   const add = useCallback(() => {
     setCount((cnt) => cnt + 1)
@@ -17,4 +16,4 @@ function App() {
   )
 }
 
-export default hot(App)
+export default App

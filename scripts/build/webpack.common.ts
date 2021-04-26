@@ -40,7 +40,7 @@ function getStyleLoaderConfig(importLoaders: number): RuleSetUseItem[] {
 
 const commonConfig: Configuration = {
   cache: true,
-  entry: ['react-hot-loader/patch', path.resolve(PROJECT_ROOT, './src')],
+  entry: path.resolve(PROJECT_ROOT, './src'),
   output: {
     publicPath: '/',
     path: path.resolve(PROJECT_ROOT, './dist'),
@@ -50,8 +50,6 @@ const commonConfig: Configuration = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
-      // 替换 react-dom 成 @hot-loader/react-dom 以支持 react hooks 的 hot reload
-      'react-dom': '@hot-loader/react-dom',
       Src: path.resolve(PROJECT_ROOT, './src'),
       Components: path.resolve(PROJECT_ROOT, './src/components'),
       Views: path.resolve(PROJECT_ROOT, './src/views'),

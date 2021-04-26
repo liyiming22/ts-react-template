@@ -1,8 +1,9 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
 import path from 'path'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import { merge } from 'webpack-merge'
-import { Configuration } from 'webpack'
+import { Configuration, HotModuleReplacementPlugin } from 'webpack'
 import 'webpack-dev-server'
 import commonConfig from './webpack.common'
 import { DEFAULT_PORT, HOST, PROJECT_ROOT } from '../constants'
@@ -20,6 +21,8 @@ const developmentConfig: Configuration = merge(commonConfig, {
         memoryLimit: 1024,
       },
     }),
+    new HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
   ],
   devServer: {
     host: HOST,
