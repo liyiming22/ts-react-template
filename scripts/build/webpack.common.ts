@@ -1,5 +1,6 @@
 import path from 'path'
 import WebpackBar from 'webpackbar'
+import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration, RuleSetUseItem } from 'webpack'
@@ -41,7 +42,9 @@ function getStyleLoaderConfig(importLoaders: number, modules = false): RuleSetUs
   ]
 }
 
-const commonConfig: Configuration = {
+const smp = new SpeedMeasurePlugin()
+
+const commonConfig: Configuration = smp.wrap({
   cache: true,
   entry: path.resolve(PROJECT_ROOT, './src'),
   output: {
@@ -138,6 +141,6 @@ const commonConfig: Configuration = {
       template: path.resolve(PROJECT_ROOT, './public/index.html'),
     }),
   ],
-}
+})
 
 export default commonConfig
